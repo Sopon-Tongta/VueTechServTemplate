@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ${DEPLOYMENT_NAME}-config-web-dev
+  namespace: ftd
+data:
+  config.json: |
+    {
+      "ENVIRONMENT": "DEV",
+      "INVENTORY_API": "https://inventorydev.thaibevapp.com/inventoryapi",
+      "INVENTORY_WORKFLOW_API": "https://inventorydev.thaibevapp.com/inventoryworkflow",
+      "PORTAL_PATH": "https://bptdev.thaibevapp.com",
+      "PORTAL_SUB_PATH": "https://bptdev.thaibevapp.com/inventory-management",
+      "SUB_PATH": "/inventory-management"
+    }

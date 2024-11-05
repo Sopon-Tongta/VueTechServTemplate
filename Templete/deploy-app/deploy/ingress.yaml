@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: ${DEPLOYMENT_NAME}-web-ingress-${STAGE}
+spec:
+  rules:
+    ## templatecicd.thaibevapp.com
+    ## templatecicd-staging.thaibevapp.com
+    - host: ${KONG_HOST_DOMAIN}
+      http:
+        paths:
+          # - path: /${PATH_WEB}
+          - path: /
+            backend:
+              serviceName: ${DEPLOYMENT_NAME}-web-service-${STAGE}
+              servicePort: 8000

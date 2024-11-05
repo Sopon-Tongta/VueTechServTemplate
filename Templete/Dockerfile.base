@@ -1,0 +1,5 @@
+FROM registryii.thaibevapp.com/tbdev/baseimage/node:19-alpine
+WORKDIR /app
+COPY package*.json ./
+
+RUN npm install --force

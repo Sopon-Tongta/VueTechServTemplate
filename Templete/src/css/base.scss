@@ -1,0 +1,177 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+//== Fix tailwind without dynamic width response ====
+// @media (min-width: 1024px) {
+//   .container {
+//     max-width: none;
+//   }
+// }
+// @media (min-width: 768px) {
+//   .container {
+//     max-width: none;
+//   }
+// }
+// @media (min-width: 640px) {
+//   .container {
+//     max-width: none;
+//   }
+// }
+//===================================================
+
+@font-face {
+  font-family: ThaiBevSansNew-Black;
+  src: url(https://inventorydev.thaibevapp.com/assets/fonts/ThaiBevSansNew-Black.otf),
+    url(https://localhost:4200/src/css/fonts/ThaiBevSansNew-Black.otf);
+}
+@font-face {
+  font-family: ThaiBevSansNew-BlackItalic;
+  src: url(https://inventorydev.thaibevapp.com/assets/fonts/ThaiBevSansNew-BlackItalic.otf),
+    url(https://localhost:4200/src/css/fonts/ThaiBevSansNew-BlackItalic.otf);
+}
+@font-face {
+  font-family: ThaiBevSansNew-Bold;
+  src: url(https://inventorydev.thaibevapp.com/assets/fonts/ThaiBevSansNew-Bold.otf),
+    url(https://localhost:4200/src/css/fonts/ThaiBevSansNew-Bold.otf);
+}
+@font-face {
+  font-family: ThaiBevSansNew-BoldItalic;
+  src: url(https://inventorydev.thaibevapp.com/assets/fonts/ThaiBevSansNew-BoldItalic.otf),
+    url(https://localhost:4200/src/css/fonts/ThaiBevSansNew-BoldItalic.otf);
+}
+@font-face {
+  font-family: ThaiBevSansNew-ExtraBold;
+  src: url(https://inventorydev.thaibevapp.com/assets/fonts/ThaiBevSansNew-ExtraBold.otf),
+    url(https://localhost:4200/src/css/fonts/ThaiBevSansNew-ExtraBold.otf);
+}
+@font-face {
+  font-family: ThaiBevSansNew-ExtraBoldItalic;
+  src: url(https://inventorydev.thaibevapp.com/assets/fonts/ThaiBevSansNew-ExtraBoldItalic.otf),
+    url(https://localhost:4200/src/css/fonts/ThaiBevSansNew-ExtraBoldItalic.otf);
+}
+@font-face {
+  font-family: ThaiBevSansNew-ExtraLight;
+  src: url(https://inventorydev.thaibevapp.com/assets/fonts/ThaiBevSansNew-ExtraLight.otf),
+    url(https://localhost:4200/src/css/fonts/ThaiBevSansNew-ExtraLight.otf);
+}
+@font-face {
+  font-family: ThaiBevSansNew-ExtraLightItalic;
+  src: url(https://inventorydev.thaibevapp.com/assets/fonts/ThaiBevSansNew-ExtraLightItalic.otf),
+    url(https://localhost:4200/src/css/fonts/ThaiBevSansNew-ExtraLightItalic.otf);
+}
+@font-face {
+  font-family: ThaiBevSansNew-Italic;
+  src: url(https://inventorydev.thaibevapp.com/assets/fonts/ThaiBevSansNew-Italic.otf),
+    url(https://localhost:4200/src/css/fonts/ThaiBevSansNew-Italic.otf);
+}
+@font-face {
+  font-family: ThaiBevSansNew-Light;
+  src: url(https://inventorydev.thaibevapp.com/assets/fonts/ThaiBevSansNew-Light.otf),
+    url(https://localhost:4200/src/css/fonts/ThaiBevSansNew-Light.otf);
+}
+@font-face {
+  font-family: ThaiBevSansNew-LightItalic;
+  src: url(https://inventorydev.thaibevapp.com/assets/fonts/ThaiBevSansNew-LightItalic.otf),
+    url(https://localhost:4200/src/css/fonts/ThaiBevSansNew-LightItalic.otf);
+}
+@font-face {
+  font-family: ThaiBevSansNew-Medium;
+  src: url(https://inventorydev.thaibevapp.com/assets/fonts/ThaiBevSansNew-Medium.otf),
+    url(https://localhost:4200/src/css/fonts/ThaiBevSansNew-Medium.otf);
+}
+@font-face {
+  font-family: ThaiBevSansNew-MediumItalic;
+  src: url(https://inventorydev.thaibevapp.com/assets/fonts/ThaiBevSansNew-MediumItalic.otf),
+    url(https://localhost:4200/src/css/fonts/ThaiBevSansNew-MediumItalic.otf);
+}
+@font-face {
+  font-family: ThaiBevSansNew-Regular;
+  src: url(https://inventorydev.thaibevapp.com/assets/fonts/ThaiBevSansNew-Regular.otf),
+    url(https://localhost:4200/src/css/fonts/ThaiBevSansNew-Regular.otf);
+}
+@font-face {
+  font-family: ThaiBevSansNew-SemiBold;
+  src: url(https://inventorydev.thaibevapp.com/assets/fonts/ThaiBevSansNew-SemiBold.otf),
+    url(https://localhost:4200/src/css/fonts/ThaiBevSansNew-SemiBold.otf);
+}
+@font-face {
+  font-family: ThaiBevSansNew-SemiBoldItalic;
+  src: url(https://inventorydev.thaibevapp.com/assets/fonts/ThaiBevSansNew-SemiBoldItalic.otf),
+    url(https://localhost:4200/src/css/fonts/ThaiBevSansNew-SemiBoldItalic.otf);
+}
+@font-face {
+  font-family: ThaiBevSansNew-Thin;
+  src: url(https://inventorydev.thaibevapp.com/assets/fonts/ThaiBevSansNew-Thin.otf),
+    url(https://localhost:4200/src/css/fonts/ThaiBevSansNew-Thin.otf);
+}
+@font-face {
+  font-family: ThaiBevSansNew-ThinItalic;
+  src: url(https://inventorydev.thaibevapp.com/assets/fonts/ThaiBevSansNew-ThinItalic.otf),
+    url(https://localhost:4200/src/css/fonts/ThaiBevSansNew-ThinItalic.otf);
+}
+
+
+// @media screen and (min-width: 640px) {
+//   .templete_web .header-main {
+//     top: 80px !important;
+//   }
+//   .templete_web .q-drawer--left {
+//     top: calc(80px + 40px) !important;
+//   }
+//   .templete_web .q-layout {
+//     min-height: calc(100vh - (80px + 10px)) !important;
+//     height: calc(100vh - (80px + 10px)) !important;
+//   }
+//   .templete_web .container {
+//     min-height: calc(100vh - (80px + 40px + 10px)) !important;
+//     height: calc(100vh - (80px + 40px + 10px)) !important;
+//   }
+//   .templete_web .container-no-qiankun {
+//     margin-top: 80px;
+//   }
+// }
+
+// @media screen and (min-width: 1366px) {
+//   .templete_web .header-main {
+//     top: 85.375px !important;
+//   }
+//   .templete_web .q-drawer--left {
+//     top: calc(85.375px + 40px) !important;
+//   }
+//   .templete_web .q-layout {
+//     min-height: calc(100vh - (85.375px + 10px)) !important;
+//     height: calc(100vh - (85.375px + 10px)) !important;
+//   }
+//   .templete_web .container {
+//     min-height: calc(100vh - (85.375px + 40px + 10px)) !important;
+//     height: calc(100vh - (85.375px + 40px + 10px)) !important;
+//   }
+//   .templete_web .container-no-qiankun {
+//     margin-top: 85.375px;
+//   }
+// }
+
+// @media screen and (min-width: 1920px) {
+//   .templete_web .header-main {
+//     top: 120px !important;
+//   }
+//   .templete_web .q-drawer--left {
+//     top: calc(120px + 40px) !important;
+//   }
+//   .templete_web .q-layout {
+//     min-height: calc(100vh - (120px + 10px)) !important;
+//     height: calc(100vh - (120px + 10px)) !important;
+//   }
+//   .templete_web .container {
+//     min-height: calc(100vh - (120px + 40px + 10px)) !important;
+//     height: calc(100vh - (120px + 40px + 10px)) !important;
+//   }
+//   .templete_web .container-no-qiankun {
+//     margin-top: 120px;
+//   }
+// }
+
+// .templete_web .container .page-container {
+//   height: 100%;
+// }

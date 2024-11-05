@@ -1,0 +1,125 @@
+variables:
+  PROJECT_NAME: InventoryUI
+  DEPLOYMENT_NAME: inventory #lower case only
+  KONG_HOST_DOMAIN_WEB_DEV: inventorydev.thaibevapp.com #lower case only
+  KONG_URL_DEV: 10.7.55.71:8001
+  POD_START_DEV: 1
+  DOMAIN_DEV: https://inventorydev.thaibevapp.com/
+
+  META_APP_LANG: vue
+  META_APP_TYPE: fontend
+  META_APP_TIRE: web
+  META_TEAMOWNER: ftd
+
+
+
+stages:
+  # - build-base-image
+  # - build-app
+  # - deploy-dev
+
+################################################################### Build Base Image #######################################################################
+# build-base-web:
+#   stage: build-base-image
+#   image: docker
+#   services:
+#     - name: docker:19.03.1-dind
+#       command: ["--insecure-registry=registryii.thaibevapp.com"]
+#   script:
+#     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+#     - docker build  --compress --network host -t $CI_REGISTRY_IMAGE/web:base -f Dockerfile.base .
+#     - docker push $CI_REGISTRY_IMAGE/web:base
+#     - docker logout
+#   only:
+#     refs:
+#       - master
+#     changes:
+#       - package.json
+#       - package-lock.json
+#       - Dockerfile.base
+#       - vite.config.js
+
+#################################################################### Build App #######################################################################
+
+# build-web-dev:
+#   stage: build-app
+#   image: docker
+#   services:
+#     - name: docker:19.03.1-dind
+#       command: ["--insecure-registry=registryii.thaibevapp.com"]
+#   script:
+#     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+#     - docker build --pull --compress --network host -t $CI_REGISTRY_IMAGE/web:$CI_COMMIT_SHORT_SHA .
+#     - docker tag $CI_REGISTRY_IMAGE/web:$CI_COMMIT_SHORT_SHA $CI_REGISTRY_IMAGE/web:latest
+#     - docker push $CI_REGISTRY_IMAGE/web:$CI_COMMIT_SHORT_SHA
+#     - docker push $CI_REGISTRY_IMAGE/web:latest
+#     - docker logout
+#   only:
+#     - master
+
+# ##################################################################### Deploy web #######################################################################
+# deploy-kube-web-staging:
+#   stage: deploy-dev
+#   extends: .deploy-kube-web-common
+#   before_script:
+#     - export STAGE=dev
+#     - export VERSION=v1
+#     ## KUBE
+#     - export KUBE_API_CERT=${KUBE_API_CERT_DEV}
+#     - export KUBE_API_EP=${KUBE_API_EP_DEV}
+#     - export KUBE_API_TOKEN=${KUBE_API_TOKEN_DEV}
+#     ## KONG
+#     - export KONG_HOST_DOMAIN=${KONG_HOST_DOMAIN_WEB_DEV}
+#     - export KONG_EP=${KONG_URL_DEV}
+#     - export KONG_HOST_PROXY=10.7.55.76
+#     ## PUBLIC PATH
+#     - export PUBLIC_PATH=${DOMAIN_DEV}
+#   only:
+#     - master
+
+# .deploy-kube-web-common:
+#   image: alpine
+#   script:
+#     ## Install Kube client
+#     - export
+#     - |
+#       apk add curl
+#       curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl \
+#           -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
+#       chmod +x ./kubectl
+#       cp kubectl /usr/local/bin/
+#     - |
+#       kubectl version --client;
+#       echo $KUBE_API_CERT | base64 -d > deploy.crt;
+#       kubectl config set-cluster k8s \
+#         --server=https://$KUBE_API_EP \
+#         --certificate-authority=deploy.crt \
+#         --embed-certs=true;
+#       kubectl config set-credentials k8s_deployer \
+#         --token=$KUBE_API_TOKEN;
+#     - |
+#       kubectl config set-context k8s \
+#         --cluster k8s \
+#         --user k8s_deployer \
+#         --namespace=ftd;
+#     - kubectl config use-context k8s
+#     ## install envsubst
+#     - apk add gettext
+#     ## verify kube config
+#     - cat ~/.kube/config
+#     - kubectl get all,ingress
+#     - export TAG=${CI_COMMIT_SHORT_SHA}
+#     - cat deploy-app/config/config-${STAGE}.yaml | envsubst
+#     - cat deploy-app/config/config-${STAGE}.yaml | envsubst | kubectl apply -f -
+#     - cat deploy-app/deploy/deployment.yaml | envsubst
+#     - cat deploy-app/deploy/deployment.yaml | envsubst | kubectl apply -f -
+#     - cat deploy-app/deploy/service.yaml | envsubst
+#     - cat deploy-app/deploy/service.yaml | envsubst | kubectl apply -f -
+#     - cat deploy-app/deploy/ingress.yaml | envsubst
+#     - cat deploy-app/deploy/ingress.yaml | envsubst | kubectl apply -f -
+#     - kubectl get all,ingress
+#     ## Deploy Kong
+#     - cat .ci_kong.sh | envsubst '$KONG_HOST_DOMAIN,$KONG_EP,$KONG_HOST_PROXY'
+#     - cat .ci_kong.sh | envsubst '$KONG_HOST_DOMAIN,$KONG_EP,$KONG_HOST_PROXY' | sh
+
+

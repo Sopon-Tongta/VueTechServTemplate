@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ${DEPLOYMENT_NAME}-web-deployment-${STAGE}
+  labels:
+    app: ${PROJECT_NAME}-deployment${VERSION}-80-m100-Mi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ${DEPLOYMENT_NAME}-web-${STAGE}
+  template:
+    metadata:
+      labels:
+        app: ${DEPLOYMENT_NAME}-web-${STAGE}
+        appName: ${PROJECT_NAME}
+        appLang: ${META_APP_LANG}
+        version: ${TAG}
+        appType: ${META_APP_TYPE}
+        appTire: ${META_APP_TIRE}
+        envName: ${STAGE}
+        teamOwner: ${META_TEAMOWNER}
+    spec:
+      containers:
+        - name: ${DEPLOYMENT_NAME}-web-${STAGE}
+          image: ${CI_REGISTRY_IMAGE}/web:${TAG}
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: config-volume
+              mountPath: config.json
+              subPath: config.json
+          env:
+            - name: PORT
+              value: "80"
+            - name: PUBLIC_PATH
+              value: ${PUBLIC_PATH}
+          resources:
+            requests:
+              memory: 80Mi
+              cpu: 70m
+            limits:
+              memory: 100Mi
+              cpu: 80m
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 60
+            timeoutSeconds: 5
+            periodSeconds: 30
+            successThreshold: 1
+            failureThreshold: 5
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 50
+            timeoutSeconds: 5
+            periodSeconds: 23
+            successThreshold: 1
+            failureThreshold: 3
+      volumes:
+        - name: config-volume
+          configMap:
+            name: ${DEPLOYMENT_NAME}-config-web-${STAGE}
